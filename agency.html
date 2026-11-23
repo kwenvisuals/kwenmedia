@@ -466,6 +466,7 @@
     /* opsz-global: Inter 18pt optical size everywhere */
     html { font-optical-sizing: none; font-variation-settings: 'opsz' 18; }
     </style>
+  <link rel="stylesheet" href="contact.css" />
 </head>
 <body>
 
@@ -567,5 +568,6 @@
   const observer = new IntersectionObserver(e => e.forEach(x => x.isIntersecting && x.target.classList.add('visible')), {threshold:0.1});
   document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 </script>
+<script src="contact.js"></script>
 </body>
 </html>
