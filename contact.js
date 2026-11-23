@@ -59,7 +59,7 @@
       lines.push(`• Topic: ${topic}`);
       if (about) lines.push(`• Interested in: ${about}`);
       if (note) lines.push('', note);
-      lines.push('', `(sent from kwenmedia.netlify.app)`);
+      lines.push('', `(sent from kwenmedia.com)`);
       msg.value = lines.join('\n');
     }
     function open(ctx) {
