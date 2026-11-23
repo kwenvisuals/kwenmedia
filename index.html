@@ -435,16 +435,21 @@
     .fade-in.visible { opacity: 1; transform: none; }
   
     /* ── WORK SHOWCASE ── */
-    .work-showcase { background: var(--black); padding: 100px 0 100px 60px; }
-    .showcase-track-wrap { overflow-x: auto; cursor: grab; user-select: none; }
-    .showcase-track-wrap::-webkit-scrollbar { height: 2px; }
-    .showcase-track-wrap::-webkit-scrollbar-track { background: var(--dark2); }
-    .showcase-track-wrap::-webkit-scrollbar-thumb { background: var(--gold); }
-    .showcase-track-wrap:active { cursor: grabbing; }
-    .showcase-track {
-      display: flex; gap: 16px;
-      width: max-content; padding-right: 60px;
+    .work-showcase { background: var(--black); padding: 100px 0; overflow: hidden; }
+    .showcase-track-wrap {
+      overflow: hidden;
+      -webkit-mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
+              mask-image: linear-gradient(to right, transparent 0, #000 6%, #000 94%, transparent 100%);
     }
+    .showcase-track {
+      display: flex; gap: 16px; width: max-content;
+      animation: showcase-marquee var(--marquee-dur, 120s) linear infinite;
+      will-change: transform;
+    }
+    .showcase-track-wrap:hover .showcase-track { animation-play-state: paused; }
+    @keyframes showcase-marquee { from { transform: translateX(0); } to { transform: translateX(calc(-50% - 8px)); } }
+    @media (prefers-reduced-motion: reduce) { .showcase-track { animation-duration: 400s; } }
+    @media (max-width: 640px) { .showcase-item { width: 180px !important; } }
     .showcase-item { flex-shrink: 0; width: 260px; }
     .showcase-video-wrap {
       position: relative; aspect-ratio: 9/16;
@@ -818,11 +823,25 @@
   </div>
   <div class="showcase-track-wrap">
     <div class="showcase-track">
-      <div class="showcase-item"><div class="showcase-video-wrap"><video autoplay muted loop playsinline><source src="work-1.mp4" type="video/mp4" /></video><div class="showcase-overlay"></div></div></div>
-      <div class="showcase-item"><div class="showcase-video-wrap"><video autoplay muted loop playsinline><source src="work-2.mp4" type="video/mp4" /></video><div class="showcase-overlay"></div></div></div>
-      <div class="showcase-item"><div class="showcase-video-wrap"><video autoplay muted loop playsinline><source src="work-3.mp4" type="video/mp4" /></video><div class="showcase-overlay"></div></div></div>
-      <div class="showcase-item"><div class="showcase-video-wrap"><video autoplay muted loop playsinline><source src="work-4.mp4" type="video/mp4" /></video><div class="showcase-overlay"></div></div></div>
-      <div class="showcase-item"><div class="showcase-video-wrap"><video autoplay muted loop playsinline><source src="work-5.mp4" type="video/mp4" /></video><div class="showcase-overlay"></div></div></div>
+      <div class="showcase-item"><div class="showcase-video-wrap"><video muted loop playsinline preload="none" poster=""><source src="work-1.mp4" type="video/mp4" /></video><div class="showcase-overlay"></div></div></div>
+      <div class="showcase-item"><div class="showcase-video-wrap"><video muted loop playsinline preload="none" poster=""><source src="work-2.mp4" type="video/mp4" /></video><div class="showcase-overlay"></div></div></div>
+      <div class="showcase-item"><div class="showcase-video-wrap"><video muted loop playsinline preload="none" poster=""><source src="work-3.mp4" type="video/mp4" /></video><div class="showcase-overlay"></div></div></div>
+      <div class="showcase-item"><div class="showcase-video-wrap"><video muted loop playsinline preload="none" poster=""><source src="work-4.mp4" type="video/mp4" /></video><div class="showcase-overlay"></div></div></div>
+      <div class="showcase-item"><div class="showcase-video-wrap"><video muted loop playsinline preload="none" poster=""><source src="work-5.mp4" type="video/mp4" /></video><div class="showcase-overlay"></div></div></div>
+      <div class="showcase-item"><div class="showcase-video-wrap"><video muted loop playsinline preload="none" poster=""><source src="work-6.mp4" type="video/mp4" /></video><div class="showcase-overlay"></div></div></div>
+      <div class="showcase-item"><div class="showcase-video-wrap"><video muted loop playsinline preload="none" poster=""><source src="work-7.mp4" type="video/mp4" /></video><div class="showcase-overlay"></div></div></div>
+      <div class="showcase-item"><div class="showcase-video-wrap"><video muted loop playsinline preload="none" poster=""><source src="work-8.mp4" type="video/mp4" /></video><div class="showcase-overlay"></div></div></div>
+      <div class="showcase-item"><div class="showcase-video-wrap"><video muted loop playsinline preload="none" poster=""><source src="work-9.mp4" type="video/mp4" /></video><div class="showcase-overlay"></div></div></div>
+      <div class="showcase-item"><div class="showcase-video-wrap"><video muted loop playsinline preload="none" poster=""><source src="work-10.mp4" type="video/mp4" /></video><div class="showcase-overlay"></div></div></div>
+      <div class="showcase-item"><div class="showcase-video-wrap"><video muted loop playsinline preload="none" poster=""><source src="work-11.mp4" type="video/mp4" /></video><div class="showcase-overlay"></div></div></div>
+      <div class="showcase-item"><div class="showcase-video-wrap"><video muted loop playsinline preload="none" poster=""><source src="work-12.mp4" type="video/mp4" /></video><div class="showcase-overlay"></div></div></div>
+      <div class="showcase-item"><div class="showcase-video-wrap"><video muted loop playsinline preload="none" poster=""><source src="work-13.mp4" type="video/mp4" /></video><div class="showcase-overlay"></div></div></div>
+      <div class="showcase-item"><div class="showcase-video-wrap"><video muted loop playsinline preload="none" poster=""><source src="work-14.mp4" type="video/mp4" /></video><div class="showcase-overlay"></div></div></div>
+      <div class="showcase-item"><div class="showcase-video-wrap"><video muted loop playsinline preload="none" poster=""><source src="work-15.mp4" type="video/mp4" /></video><div class="showcase-overlay"></div></div></div>
+      <div class="showcase-item"><div class="showcase-video-wrap"><video muted loop playsinline preload="none" poster=""><source src="work-16.mp4" type="video/mp4" /></video><div class="showcase-overlay"></div></div></div>
+      <div class="showcase-item"><div class="showcase-video-wrap"><video muted loop playsinline preload="none" poster=""><source src="work-17.mp4" type="video/mp4" /></video><div class="showcase-overlay"></div></div></div>
+      <div class="showcase-item"><div class="showcase-video-wrap"><video muted loop playsinline preload="none" poster=""><source src="work-18.mp4" type="video/mp4" /></video><div class="showcase-overlay"></div></div></div>
+      <div class="showcase-item"><div class="showcase-video-wrap"><video muted loop playsinline preload="none" poster=""><source src="work-19.mp4" type="video/mp4" /></video><div class="showcase-overlay"></div></div></div>
     </div>
   </div>
 </section>
@@ -1224,6 +1243,26 @@ document.addEventListener('DOMContentLoaded', () => {
     if (needName()) { e.preventDefault(); return; }
     await copy();
   });
+});
+</script>
+
+<script>
+// Portfolio marquee: duplicate items for a seamless loop, play only videos on screen
+document.addEventListener('DOMContentLoaded', () => {
+  const track = document.querySelector('.showcase-track');
+  if (!track) return;
+  [...track.children].forEach(el => { const c = el.cloneNode(true); c.setAttribute('aria-hidden', 'true'); track.appendChild(c); });
+  const n = track.children.length / 2;
+  track.style.setProperty('--marquee-dur', (n * 6) + 's');
+  const vids = track.querySelectorAll('video');
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      const v = e.target;
+      if (e.isIntersecting) { if (v.preload !== 'auto') v.preload = 'auto'; v.play().catch(() => {}); }
+      else v.pause();
+    });
+  }, { rootMargin: '0px 300px' });
+  vids.forEach(v => io.observe(v));
 });
 </script>
 </body>
