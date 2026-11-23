@@ -354,17 +354,18 @@
     }
     .cta-video {
       position: absolute; inset: 0; width: 100%; height: 100%;
-      object-fit: cover; opacity: 0.2;
+      object-fit: cover; opacity: 0.45;
     }
     .cta-overlay {
       position: absolute; inset: 0;
-      background: linear-gradient(to bottom, var(--black), rgba(10,10,10,0.7), var(--black));
+      background: linear-gradient(to bottom, var(--black) 0%, rgba(10,10,10,0.4) 30%, rgba(10,10,10,0.4) 70%, var(--black) 100%);
     }
     .cta-content { position: relative; z-index: 2; }
     .cta-title {
-      font-family: 'Syne', sans-serif;
-      font-size: clamp(36px, 6vw, 72px); font-weight: 300;
-      margin-bottom: 16px;
+      font-family: 'Inter', sans-serif;
+      font-optical-sizing: none; font-variation-settings: 'opsz' 18;
+      font-size: clamp(36px, 6vw, 80px); font-weight: 800; line-height: 1;
+      letter-spacing: -0.035em; margin-bottom: 20px;
     }
     .cta-sub { font-size: 13px; color: var(--gray); margin-bottom: 40px; }
     .cta-btns { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px; }
@@ -570,6 +571,11 @@
       .pkg-wide .pkg-video-wrap { aspect-ratio: 1/1 !important; }
     }
 
+    .pkg-old {
+      font-size: 13px; color: rgba(245,245,240,0.45); text-decoration: line-through;
+      text-decoration-color: rgba(245,245,240,0.7); margin-bottom: 2px; letter-spacing: .5px;
+    }
+    .req dd s { color: var(--gray); margin-right: 8px; }
     /* ── ORDER REQUEST MODAL (n4-style) ── */
     .req {
       position: fixed; inset: 0; z-index: 10000; display: none;
@@ -714,6 +720,7 @@
           <div class="pkg-play-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div>
           <div class="pkg-info">
             <div class="pkg-name">VIRAL EDIT</div>
+            <div class="pkg-old">$150</div>
             <div class="pkg-price">$80</div>
             <ul class="pkg-features"><li>15–59 SEC</li><li>FAST, TREND-DRIVEN</li><li>CREATIVE, RHYTHMIC</li></ul>
           </div>
@@ -731,6 +738,7 @@
           <div class="pkg-play-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div>
           <div class="pkg-info">
             <div class="pkg-name">BRANDING EDIT</div>
+            <div class="pkg-old">$120</div>
             <div class="pkg-price">$50</div>
             <ul class="pkg-features"><li>TALKING HEAD + B-ROLL</li><li>MOTION GRAPHICS</li><li>CAPTIONS</li></ul>
           </div>
@@ -748,6 +756,7 @@
           <div class="pkg-play-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div>
           <div class="pkg-info">
             <div class="pkg-name">GROOVY EDIT</div>
+            <div class="pkg-old">$140</div>
             <div class="pkg-price">$70</div>
             <ul class="pkg-features"><li>15–59 SEC</li><li>ONLY PROPERTY</li><li>FAST-PACED, CLEAN</li></ul>
           </div>
@@ -769,6 +778,7 @@
           <div class="pkg-play-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div>
           <div class="pkg-info">
             <div class="pkg-name">CINEMATIC EDIT</div>
+            <div class="pkg-old">$190</div>
             <div class="pkg-price">$120</div>
             <ul class="pkg-features"><li>20 SEC – 2 MIN</li><li>ELEGANT, CINEMATIC</li></ul>
           </div>
@@ -786,6 +796,7 @@
           <div class="pkg-play-btn"><svg width="18" height="18" viewBox="0 0 24 24" fill="white"><polygon points="5,3 19,12 5,21"/></svg></div>
           <div class="pkg-info">
             <div class="pkg-name">VALUE EDIT</div>
+            <div class="pkg-old">$170</div>
             <div class="pkg-price">$100</div>
             <ul class="pkg-features"><li>WALKTHROUGH</li><li>CLEAN, AMBIENT</li></ul>
           </div>
@@ -882,8 +893,8 @@
 
 <!-- CTA -->
 <section class="cta-section" id="contact">
-  <video class="cta-video" autoplay muted loop playsinline>
-    <source src="footer-bg.mp4" type="video/mp4" />
+  <video class="cta-video" autoplay muted loop playsinline preload="metadata">
+    <source src="demo-value.mp4" type="video/mp4" />
   </video>
   <div class="cta-overlay"></div>
   <div class="cta-content fade-in">
@@ -1171,7 +1182,7 @@ document.addEventListener('DOMContentLoaded', () => {
     $('reqDl').innerHTML =
       `<dt>Service</dt><dd>Single edit, per video</dd>` +
       `<dt>Package</dt><dd><b>${p.name}</b></dd>` +
-      `<dt>Price</dt><dd>$${p.price} per video</dd>` +
+      `<dt>Price</dt><dd><s>$${p.price + 70}</s>$${p.price} per video</dd>` +
       `<dt>Format</dt><dd>${p.format}</dd>` +
       `<dt>Includes</dt><dd>${p.includes.join('<br>')}</dd>`;
     $('rqQty').value = 1;
