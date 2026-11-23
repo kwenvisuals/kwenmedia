@@ -445,7 +445,8 @@
       display: flex; gap: 16px; width: max-content;
       will-change: transform; touch-action: pan-y;
     }
-    .showcase-track-wrap { cursor: grab; user-select: none; -webkit-user-select: none; }
+    html, body { overscroll-behavior-x: none; }
+    .showcase-track-wrap { cursor: grab; user-select: none; -webkit-user-select: none; overscroll-behavior: contain; }
     .showcase-track-wrap.dragging { cursor: grabbing; }
     .showcase-track video { pointer-events: none; }
     @media (max-width: 640px) { .showcase-item { width: 180px !important; } }
@@ -1279,8 +1280,15 @@ document.addEventListener('DOMContentLoaded', () => {
   wrap.addEventListener('pointerup', end);
   wrap.addEventListener('pointercancel', end);
   wrap.addEventListener('wheel', e => {
-    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) { e.preventDefault(); x -= e.deltaX; resumeAt = performance.now() + 1200; }
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY) * 0.6) {
+      e.preventDefault(); e.stopPropagation();
+      vel = 0; x -= e.deltaX; resumeAt = performance.now() + 1200;
+    }
   }, { passive: false });
+  // stop the browser treating a horizontal swipe as Back / Forward
+  document.addEventListener('wheel', e => {
+    if (wrap.contains(e.target) && Math.abs(e.deltaX) > Math.abs(e.deltaY)) e.preventDefault();
+  }, { passive: false, capture: true });
 
   // Play only the videos that are on screen
   const io = new IntersectionObserver(entries => {
