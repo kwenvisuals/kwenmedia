@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Agency | kwenmedia</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -57,7 +57,7 @@
     nav.scrolled { background: rgba(10,10,10,0.97); }
 
     .nav-logo {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Inter', sans-serif;
       font-size: 22px; font-weight: 400; letter-spacing: 2px;
       color: var(--white); text-decoration: none;
       text-transform: uppercase;
@@ -132,7 +132,7 @@
       
     }
     .hero-title {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Inter', sans-serif;
       font-size: clamp(52px, 8vw, 96px); font-weight: 300; line-height: 1.0;
       margin-bottom: 24px; letter-spacing: -1px;
     }
@@ -179,7 +179,7 @@
       
     }
     .section-title {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Inter', sans-serif;
       font-size: clamp(36px, 5vw, 64px); font-weight: 300; line-height: 1.1;
       margin-bottom: 60px;
     }
@@ -214,7 +214,7 @@
       padding: 24px; z-index: 2;
     }
     .pkg-name {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Inter', sans-serif;
       font-size: 24px; font-weight: 400; margin-bottom: 4px;
     }
     .pkg-price {
@@ -263,7 +263,7 @@
       display: flex; gap: 24px; align-items: flex-start;
     }
     .bl-num {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Inter', sans-serif;
       font-size: 48px; font-weight: 300; background: var(--gold-gradient); background-size: 200% auto;
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
       background-clip: text; animation: gold-shift 4s linear infinite;
@@ -271,7 +271,7 @@
       line-height: 1; flex-shrink: 0; width: 60px;
     }
     .bl-feature-title {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Inter', sans-serif;
       font-size: 22px; font-weight: 400; margin-bottom: 8px;
     }
     .bl-feature-desc { font-size: 12px; color: var(--gray); line-height: 1.8; }
@@ -291,7 +291,7 @@
       text-align: center;
     }
     .stat-num {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Inter', sans-serif;
       font-size: 64px; font-weight: 700; line-height: 1; margin-bottom: 8px;
       background: var(--gold-gradient); background-size: 200% auto;
       -webkit-background-clip: text; -webkit-text-fill-color: transparent;
@@ -311,7 +311,7 @@
     }
     .logos-track:hover { animation-play-state: paused; }
     .logo-item {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Inter', sans-serif;
       font-size: 18px; font-weight: 300; letter-spacing: 2px;
       color: rgba(255,255,255,0.2); white-space: nowrap;
       text-transform: uppercase; flex-shrink: 0;
@@ -332,7 +332,7 @@
       background: var(--dark2); padding: 48px;
     }
     .testimonial-quote {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Inter', sans-serif;
       font-size: 18px; font-weight: 300; font-style: italic;
       line-height: 1.7; color: rgba(245,245,240,0.85);
       margin-bottom: 28px;
@@ -356,7 +356,7 @@
     }
     .cta-content { position: relative; z-index: 2; }
     .cta-title {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Inter', sans-serif;
       font-size: clamp(36px, 6vw, 72px); font-weight: 300;
       margin-bottom: 16px;
     }
@@ -376,7 +376,7 @@
       margin-bottom: 48px;
     }
     .footer-logo {
-      font-family: 'Syne', sans-serif;
+      font-family: 'Inter', sans-serif;
       font-size: 24px; font-weight: 400; letter-spacing: 2px;
       text-transform: uppercase; color: var(--white); margin-bottom: 16px;
     }
@@ -463,6 +463,8 @@
     .stat-label { text-transform: uppercase; }
     .footer-nav-title { text-transform: uppercase; }
     .footer-logo { text-transform: uppercase; }
+    /* opsz-global: Inter 18pt optical size everywhere */
+    html { font-optical-sizing: none; font-variation-settings: 'opsz' 18; }
     </style>
 </head>
 <body>
@@ -491,23 +493,23 @@
 
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:2px;" class="fade-in">
     <div style="background:var(--dark2);padding:48px;">
-      <div style="font-size:40px;font-weight:700;color:rgba(255,255,255,0.1);font-family:'Syne',sans-serif;margin-bottom:12px;">01</div>
-      <h3 style="font-family:'Syne',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;margin-bottom:12px;">Dedicated Editor</h3>
+      <div style="font-size:40px;font-weight:700;color:rgba(255,255,255,0.1);font-family:'Inter', sans-serif;margin-bottom:12px;">01</div>
+      <h3 style="font-family:'Inter', sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;margin-bottom:12px;">Dedicated Editor</h3>
       <p style="color:var(--gray);font-size:13px;line-height:1.8;">Your own editor, trained on your style, your standards. No briefing from scratch every time.</p>
     </div>
     <div style="background:var(--dark2);padding:48px;">
-      <div style="font-size:40px;font-weight:700;color:rgba(255,255,255,0.1);font-family:'Syne',sans-serif;margin-bottom:12px;">02</div>
-      <h3 style="font-family:'Syne',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;margin-bottom:12px;">Fast Turnaround</h3>
+      <div style="font-size:40px;font-weight:700;color:rgba(255,255,255,0.1);font-family:'Inter', sans-serif;margin-bottom:12px;">02</div>
+      <h3 style="font-family:'Inter', sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;margin-bottom:12px;">Fast Turnaround</h3>
       <p style="color:var(--gray);font-size:13px;line-height:1.8;">Consistent delivery timelines. Whether it's 1 video or 20 a week — we scale with you.</p>
     </div>
     <div style="background:var(--dark2);padding:48px;">
-      <div style="font-size:40px;font-weight:700;color:rgba(255,255,255,0.1);font-family:'Syne',sans-serif;margin-bottom:12px;">03</div>
-      <h3 style="font-family:'Syne',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;margin-bottom:12px;">Quality Control</h3>
+      <div style="font-size:40px;font-weight:700;color:rgba(255,255,255,0.1);font-family:'Inter', sans-serif;margin-bottom:12px;">03</div>
+      <h3 style="font-family:'Inter', sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;margin-bottom:12px;">Quality Control</h3>
       <p style="color:var(--gray);font-size:13px;line-height:1.8;">Every video reviewed before delivery. We don't just deliver — we deliver right.</p>
     </div>
     <div style="background:var(--dark2);padding:48px;">
-      <div style="font-size:40px;font-weight:700;color:rgba(255,255,255,0.1);font-family:'Syne',sans-serif;margin-bottom:12px;">04</div>
-      <h3 style="font-family:'Syne',sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;margin-bottom:12px;">Real Estate Focus</h3>
+      <div style="font-size:40px;font-weight:700;color:rgba(255,255,255,0.1);font-family:'Inter', sans-serif;margin-bottom:12px;">04</div>
+      <h3 style="font-family:'Inter', sans-serif;font-size:20px;font-weight:700;text-transform:uppercase;margin-bottom:12px;">Real Estate Focus</h3>
       <p style="color:var(--gray);font-size:13px;line-height:1.8;">We specialize in property content. We understand the market, the pace, and what converts.</p>
     </div>
   </div>
