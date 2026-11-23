@@ -443,12 +443,11 @@
     }
     .showcase-track {
       display: flex; gap: 16px; width: max-content;
-      animation: showcase-marquee var(--marquee-dur, 120s) linear infinite;
-      will-change: transform;
+      will-change: transform; touch-action: pan-y;
     }
-    .showcase-track-wrap:hover .showcase-track { animation-play-state: paused; }
-    @keyframes showcase-marquee { from { transform: translateX(0); } to { transform: translateX(calc(-50% - 8px)); } }
-    @media (prefers-reduced-motion: reduce) { .showcase-track { animation-duration: 400s; } }
+    .showcase-track-wrap { cursor: grab; user-select: none; -webkit-user-select: none; }
+    .showcase-track-wrap.dragging { cursor: grabbing; }
+    .showcase-track video { pointer-events: none; }
     @media (max-width: 640px) { .showcase-item { width: 180px !important; } }
     .showcase-item { flex-shrink: 0; width: 260px; }
     .showcase-video-wrap {
@@ -1012,25 +1011,6 @@
   }, { threshold: 0.5 });
   statNums.forEach(el => statsObs.observe(el));
 
-  // Drag to scroll showcase
-  const trackWrap = document.querySelector('.showcase-track-wrap');
-  if (trackWrap) {
-    let isDown = false, startX, scrollLeft;
-    trackWrap.addEventListener('mousedown', e => {
-      isDown = true; startX = e.pageX - trackWrap.offsetLeft;
-      scrollLeft = trackWrap.scrollLeft;
-    });
-    trackWrap.addEventListener('mouseleave', () => isDown = false);
-    trackWrap.addEventListener('mouseup', () => isDown = false);
-    trackWrap.addEventListener('mousemove', e => {
-      if (!isDown) return;
-      e.preventDefault();
-      const x = e.pageX - trackWrap.offsetLeft;
-      trackWrap.scrollLeft = scrollLeft - (x - startX);
-    });
-  }
-
-
   // Package video interaction - click to play with sound
   document.querySelectorAll('.pkg-video-wrap video').forEach(video => {
     video.addEventListener('click', function() {
@@ -1247,22 +1227,68 @@ document.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <script>
-// Portfolio marquee: duplicate items for a seamless loop, play only videos on screen
+// Portfolio marquee: auto-scrolls forever, and can be dragged / swiped / wheeled
 document.addEventListener('DOMContentLoaded', () => {
+  const wrap = document.querySelector('.showcase-track-wrap');
   const track = document.querySelector('.showcase-track');
-  if (!track) return;
+  if (!wrap || !track) return;
   [...track.children].forEach(el => { const c = el.cloneNode(true); c.setAttribute('aria-hidden', 'true'); track.appendChild(c); });
-  const n = track.children.length / 2;
-  track.style.setProperty('--marquee-dur', (n * 6) + 's');
-  const vids = track.querySelectorAll('video');
+
+  const SPEED = 45;            // px per second
+  let x = 0, half = 0, last = performance.now();
+  let dragging = false, startX = 0, startPos = 0, moved = 0, resumeAt = 0, vel = 0, lastMoveX = 0, lastMoveT = 0;
+
+  const measure = () => { half = track.scrollWidth / 2; };
+  measure(); window.addEventListener('resize', measure);
+  const wrapX = v => { if (!half) return v; v = v % half; return v > 0 ? v - half : v; };
+
+  function tick(now) {
+    const dt = Math.min(0.05, (now - last) / 1000); last = now;
+    if (!dragging) {
+      if (Math.abs(vel) > 5) { x += vel * dt; vel *= 0.94; }          // fling momentum
+      else if (now > resumeAt) x -= SPEED * dt;                       // auto-play
+    }
+    x = wrapX(x);
+    track.style.transform = `translate3d(${x}px,0,0)`;
+    requestAnimationFrame(tick);
+  }
+  requestAnimationFrame(tick);
+
+  wrap.addEventListener('pointerdown', e => {
+    dragging = true; moved = 0; vel = 0;
+    startX = lastMoveX = e.clientX; startPos = x; lastMoveT = performance.now();
+    wrap.classList.add('dragging');
+    wrap.setPointerCapture(e.pointerId);
+  });
+  wrap.addEventListener('pointermove', e => {
+    if (!dragging) return;
+    const now = performance.now();
+    moved = Math.max(moved, Math.abs(e.clientX - startX));
+    x = startPos + (e.clientX - startX);
+    if (now - lastMoveT > 0) vel = (e.clientX - lastMoveX) / ((now - lastMoveT) / 1000);
+    lastMoveX = e.clientX; lastMoveT = now;
+  });
+  const end = () => {
+    if (!dragging) return;
+    dragging = false; wrap.classList.remove('dragging');
+    vel = Math.max(-3000, Math.min(3000, vel));
+    resumeAt = performance.now() + 1200;
+  };
+  wrap.addEventListener('pointerup', end);
+  wrap.addEventListener('pointercancel', end);
+  wrap.addEventListener('wheel', e => {
+    if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) { e.preventDefault(); x -= e.deltaX; resumeAt = performance.now() + 1200; }
+  }, { passive: false });
+
+  // Play only the videos that are on screen
   const io = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      const v = e.target;
-      if (e.isIntersecting) { if (v.preload !== 'auto') v.preload = 'auto'; v.play().catch(() => {}); }
+    entries.forEach(en => {
+      const v = en.target;
+      if (en.isIntersecting) { if (v.preload !== 'auto') v.preload = 'auto'; v.play().catch(() => {}); }
       else v.pause();
     });
   }, { rootMargin: '0px 300px' });
-  vids.forEach(v => io.observe(v));
+  track.querySelectorAll('video').forEach(v => io.observe(v));
 });
 </script>
 </body>
