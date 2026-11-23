@@ -581,6 +581,14 @@
       text-decoration-color: rgba(245,245,240,0.7); margin-bottom: 2px; letter-spacing: .5px;
     }
     .req dd s { color: var(--gray); margin-right: 8px; }
+    #reqToast {
+      position: fixed; left: 50%; bottom: 28px; transform: translate(-50%, 20px);
+      z-index: 10001; background: var(--white); color: var(--black);
+      padding: 14px 22px; border-radius: 3px; font: 500 13px 'DM Sans', sans-serif;
+      letter-spacing: .3px; box-shadow: 0 10px 30px rgba(0,0,0,.4);
+      opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; max-width: 90vw; text-align: center;
+    }
+    #reqToast.show { opacity: 1; transform: translate(-50%, 0); }
     /* ── ORDER REQUEST MODAL (n4-style) ── */
     .req {
       position: fixed; inset: 0; z-index: 10000; display: none;
@@ -1118,7 +1126,7 @@
       <a class="req-btn req-btn-solid" id="reqGo" href="https://ig.me/m/kwenmedia" target="_blank" rel="noopener">Copy &amp; open Instagram <span>&rarr;</span></a>
       <button class="req-btn req-btn-line" id="reqCopy" type="button">Copy</button>
     </div>
-    <p class="req-note">Instagram doesn&rsquo;t allow pre-filled messages, so we copy yours for you. Just paste it into the chat with Kwen Media and send.</p>
+    <p class="req-note">One tap copies your message and opens our Instagram chat. Just paste and send.</p>
   </div>
 </div>
 
@@ -1211,9 +1219,26 @@ document.addEventListener('DOMContentLoaded', () => {
   ['rqName','rqQty','rqDue','rqLink','rqAddr'].forEach(id => $(id).addEventListener('input', build));
   msg.addEventListener('input', () => { edited = true; });
 
+  // Synchronous copy (works inside the click, before the browser leaves the page)
+  function copySync(text) {
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0;font-size:16px;';
+    document.body.appendChild(ta);
+    ta.focus(); ta.select(); ta.setSelectionRange(0, text.length);
+    let ok = false; try { ok = document.execCommand('copy'); } catch (_) {}
+    document.body.removeChild(ta);
+    return ok;
+  }
   async function copy() {
-    try { await navigator.clipboard.writeText(msg.value); return true; }
-    catch (_) { msg.select(); try { return document.execCommand('copy'); } catch (__) { return false; } }
+    if (copySync(msg.value)) return true;
+    try { await navigator.clipboard.writeText(msg.value); return true; } catch (_) { return false; }
+  }
+  function toast(t) {
+    let el = document.getElementById('reqToast');
+    if (!el) { el = document.createElement('div'); el.id = 'reqToast'; document.body.appendChild(el); }
+    el.textContent = t; el.classList.add('show');
+    clearTimeout(el._t); el._t = setTimeout(() => el.classList.remove('show'), 4000);
   }
   function needName() {
     if ($('rqName').value.trim()) return false;
@@ -1226,9 +1251,16 @@ document.addEventListener('DOMContentLoaded', () => {
     b.textContent = ok ? 'Copied ✓' : 'Copy failed';
     setTimeout(() => { b.textContent = 'Copy'; }, 1800);
   });
-  $('reqGo').addEventListener('click', async e => {
-    if (needName()) { e.preventDefault(); return; }
-    await copy();
+  $('reqGo').addEventListener('click', e => {
+    e.preventDefault();
+    if (needName()) return;
+    const ok = copySync(msg.value);
+    if (!ok && navigator.clipboard) navigator.clipboard.writeText(msg.value).catch(() => {});
+    toast('Message copied ✓  Paste it in the Instagram chat and hit send.');
+    const url = 'https://ig.me/m/kwenmedia';
+    const mobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    if (mobile) { setTimeout(() => { location.href = url; }, 700); }   // opens the Instagram app straight into the chat
+    else { window.open(url, '_blank', 'noopener'); }                    // desktop: Instagram DM in a new tab
   });
 });
 </script>
