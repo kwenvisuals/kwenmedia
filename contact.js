@@ -141,3 +141,33 @@
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init); else init();
 })();
+
+// Mobile menu (☰)
+(function () {
+  function initNav() {
+    const nav = document.getElementById('navbar'); if (!nav || nav.querySelector('.nav-burger')) return;
+    const links = [...nav.querySelectorAll('.nav-links a')];
+    const order = nav.querySelector('.nav-ctas .btn-outline');
+    const btn = document.createElement('button');
+    btn.type = 'button'; btn.className = 'nav-burger'; btn.setAttribute('aria-label', 'Open menu'); btn.setAttribute('aria-expanded', 'false');
+    btn.innerHTML = '<span></span><span></span><span></span>';
+    nav.appendChild(btn);
+    const panel = document.createElement('div');
+    panel.className = 'mnav'; panel.id = 'mnav';
+    const here = location.pathname.split('/').pop() || 'index.html';
+    const items = [['index.html', 'Home'], ...links.map(a => [a.getAttribute('href'), a.textContent.trim()])];
+    if (order) items.push([order.getAttribute('href'), order.textContent.trim()]);
+    panel.innerHTML = items.map(([h, t]) => `<a href="${h}"${h === here ? ' class="cur"' : ''}>${t}</a>`).join('');
+    document.body.appendChild(panel);
+    const set = open => {
+      panel.classList.toggle('open', open); btn.classList.toggle('open', open);
+      document.body.classList.toggle('mnav-open', open);
+      btn.setAttribute('aria-expanded', String(open)); btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+    };
+    btn.addEventListener('click', () => set(!panel.classList.contains('open')));
+    panel.addEventListener('click', e => { if (e.target.closest('a')) set(false); });
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') set(false); });
+    window.addEventListener('resize', () => { if (innerWidth > 768) set(false); });
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initNav); else initNav();
+})();
