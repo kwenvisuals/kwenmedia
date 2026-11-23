@@ -1155,13 +1155,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const qty = Math.max(1, parseInt($('rqQty').value, 10) || 1);
     const total = qty * p.price;
     $('rqTot').textContent = `$${total} (${qty} × $${p.price})`;
+    const svc = qty > 1 ? `${qty} edits, $${p.price} per video` : 'Single edit, per video';
+    $('reqEyebrow').textContent = qty > 1 ? `${qty} edits` : 'Single edit';
+    if ($('reqSvc')) $('reqSvc').textContent = svc;
     if (edited) return;
     const name = $('rqName').value.trim();
+    const sTotal = qty > 1 ? `$${total} (${qty} videos × $${p.price})` : `$${total}`;
     msg.value =
-`Hi Kwen Media, I’d like to book this:
+`Hi Kwen Media, I’d like to book ${qty > 1 ? qty + ' edits' : 'this'}:
 
 • Client name: ${name || '(please add your name)'}
-• Service: Single edit (per video)
+• Service: ${qty > 1 ? qty + ' edits (' + p.name + ')' : 'Single edit'}
 • Package: ${p.name}
 • Price: $${p.price} per video
 • Format: ${p.format}
@@ -1170,7 +1174,7 @@ document.addEventListener('DOMContentLoaded', () => {
 • Deadline: ${fmtDate($('rqDue').value) || '(flexible)'}
 • Footage link: ${$('rqLink').value.trim() || '(will send)'}
 • Property address: ${$('rqAddr').value.trim() || '—'}
-• Estimated total: $${total}
+• Estimated total: ${sTotal}
 • Ref: EDIT-${p.name.replace(/\s+/g,'').toUpperCase()}
 
 (sent from kwenmedia.netlify.app)`;
@@ -1181,13 +1185,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const p = PKGS[key];
     $('reqTitle').textContent = p.name;
     $('reqDl').innerHTML =
-      `<dt>Service</dt><dd>Single edit, per video</dd>` +
+      `<dt>Service</dt><dd id="reqSvc">Single edit, per video</dd>` +
       `<dt>Package</dt><dd><b>${p.name}</b></dd>` +
       `<dt>Price</dt><dd><s>$${p.price + 70}</s>$${p.price} per video</dd>` +
       `<dt>Format</dt><dd>${p.format}</dd>` +
       `<dt>Includes</dt><dd>${p.includes.join('<br>')}</dd>`;
     $('rqQty').value = 1;
     $('rqName').classList.remove('err');
+    $('rqQty').value = 1;
     build();
     document.querySelectorAll('.alacarte video').forEach(v => { v.muted = true; });
     document.querySelectorAll('.alacarte .pkg-mute').forEach(b => b.classList.remove('on'));
