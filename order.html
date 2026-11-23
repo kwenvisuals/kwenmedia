@@ -736,6 +736,78 @@
     }
     /* opsz-global: Inter 18pt optical size everywhere */
     html { font-optical-sizing: none; font-variation-settings: 'opsz' 18; }
+    /* ── THE WORK (portfolio by category) ── */
+    .wk-top { display: flex; justify-content: space-between; align-items: flex-end; gap: 32px; margin-bottom: 28px; flex-wrap: wrap; }
+    .wk-top .section-title { margin-bottom: 0; }
+    .wk-sub { color: var(--gray); font-size: 14px; line-height: 1.7; max-width: 320px; }
+    .wk-filters { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 56px; }
+    .wk-filters button {
+      background: transparent; color: rgba(245,245,240,.75); border: 1px solid rgba(255,255,255,.16);
+      border-radius: 999px; padding: 9px 16px; font: 500 10.5px 'DM Sans', sans-serif; letter-spacing: 2px;
+      text-transform: uppercase; cursor: pointer; transition: all .2s;
+    }
+    .wk-filters button span { opacity: .55; margin-left: 6px; }
+    .wk-filters button:hover { border-color: var(--white); color: var(--white); }
+    .wk-filters button.on { background: var(--white); color: var(--black); border-color: var(--white); }
+    .wk-list .wk-cat { margin: 0 0 56px; padding: 0 0 48px; max-width: none; border-bottom: 1px solid var(--border); }
+    .wk-list .wk-cat:last-of-type { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+    .wk-head { display: flex; align-items: center; gap: 22px; margin-bottom: 26px; }
+    .wk-n { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 52px; line-height: 1; letter-spacing: -0.04em; color: rgba(245,245,240,.35); }
+    .wk-title { display: flex; align-items: baseline; gap: 14px; flex: 1; flex-wrap: wrap; }
+    .wk-title h3 { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 26px; text-transform: uppercase; letter-spacing: -0.02em; }
+    .wk-count { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); }
+    .wk-ctl { display: flex; align-items: center; gap: 8px; }
+    .wk-arr {
+      width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(255,255,255,.2);
+      background: transparent; color: var(--white); font-size: 15px; cursor: pointer; transition: all .2s;
+    }
+    .wk-arr:hover:not(:disabled) { background: var(--white); color: var(--black); }
+    .wk-arr:disabled { opacity: .3; cursor: default; }
+    .wk-order {
+      margin-left: 8px; padding: 12px 18px; border: 1px solid rgba(255,255,255,.2); color: var(--white);
+      text-decoration: none; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; transition: all .2s;
+    }
+    .wk-order:hover { background: var(--white); color: var(--black); }
+    .wk-grid {
+      display: flex; gap: 16px; overflow-x: auto; scroll-snap-type: x mandatory; scroll-behavior: smooth;
+      padding-bottom: 6px; scrollbar-width: none;
+    }
+    .wk-grid::-webkit-scrollbar { display: none; }
+    .wk-card { flex: 0 0 auto; scroll-snap-align: start; }
+    .wk-grid.v .wk-card { width: 260px; }
+    .wk-grid.h .wk-card { width: 520px; }
+    .wk-media {
+      position: relative; display: block; width: 100%; aspect-ratio: var(--ar); padding: 0; border: 1px solid rgba(255,255,255,.06);
+      border-radius: 6px; overflow: hidden; background: var(--dark2); cursor: pointer;
+    }
+    .wk-media video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .92; transition: opacity .3s, transform .5s; pointer-events: none; }
+    .wk-media:hover video { opacity: 1; transform: scale(1.03); }
+    .wk-play {
+      position: absolute; left: 50%; top: 50%; width: 52px; height: 52px; margin: -26px 0 0 -26px; border-radius: 50%;
+      display: grid; place-items: center; color: var(--white); background: rgba(0,0,0,.45);
+      border: 1px solid rgba(255,255,255,.35); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+      opacity: .75; transition: all .25s;
+    }
+    .wk-media:hover .wk-play { opacity: 1; background: var(--white); color: var(--black); }
+    .wk-label { margin-top: 10px; font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gray); }
+    .wk-lb {
+      position: fixed; inset: 0; z-index: 10002; display: none; align-items: center; justify-content: center;
+      background: rgba(0,0,0,.92); padding: 24px;
+    }
+    .wk-lb.active { display: flex; }
+    .wk-lb video { max-width: min(100%, 1100px); max-height: 88vh; border-radius: 6px; background: #000; }
+    .wk-lb-x { position: absolute; top: 18px; right: 24px; background: none; border: none; color: #fff; font-size: 34px; cursor: pointer; opacity: .8; }
+    .wk-lb-x:hover { opacity: 1; }
+    @media (max-width: 768px) {
+      .wk-head { flex-wrap: wrap; gap: 14px; }
+      .wk-n { font-size: 38px; }
+      .wk-title h3 { font-size: 20px; }
+      .wk-ctl { width: 100%; }
+      .wk-order { margin-left: auto; }
+      .wk-grid.v .wk-card { width: 62vw; }
+      .wk-grid.h .wk-card { width: 84vw; }
+      .wk-filters { margin-bottom: 40px; }
+    }
     </style>
   <link rel="stylesheet" href="contact.css" />
   <link rel="icon" href="favicon.ico" sizes="any" />
@@ -766,7 +838,7 @@
     <p style="color:var(--gray);font-size:14px;max-width:500px;margin:0 auto;">Choose your edit style below and DM us on Instagram to get started.</p>
   </div>
 
-  <div class="alacarte">
+  <div class="alacarte" id="packages">
   <div class="fade-in pkg-layout">
 
     <!-- Top row: vertical 9:16 cards -->
@@ -877,60 +949,52 @@
 
 </section>
 
-<!-- ADD-ON SERVICES -->
-<section class="order-sec" style="padding:0 60px 100px; max-width:1200px; margin:0 auto;">
-  <div class="fade-in" style="margin-bottom:48px;">
-    <p class="section-label">Add-Ons</p>
-    <h2 class="section-title" style="margin-bottom:8px;">Additional Services</h2>
-    <p style="color:var(--gray);font-size:13px;">Additional formats available on top of any package.</p>
+<!-- THE WORK -->
+<section class="order-sec wk-list" id="work" style="padding:20px 60px 110px; max-width:1240px; margin:0 auto;">
+  <div class="wk-top fade-in">
+    <div>
+      <p class="section-label">Selected work</p>
+      <h2 class="section-title">The Work.</h2>
+    </div>
+    <p class="wk-sub">Real edits for agents and media teams. Tap any video to hear it.</p>
+  </div>
+  <div class="wk-filters" role="group" aria-label="Filter edits">
+    <button type="button" class="on" data-f="all">All <span>26</span></button>
+    <button type="button" data-f="social">Social Reels <span>23</span></button>
+    <button type="button" data-f="cinematic">Cinematic &amp; Walkthrough <span>3</span></button>
   </div>
 
-  <div class="fade-in addon-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:2px;">
-
-    <!-- Brand Edits 9:16 -->
-    <div style="background:var(--dark2);padding:48px 36px;display:flex;flex-direction:column;justify-content:space-between;">
-      <div>
-        <div style="display:inline-block;padding:4px 12px;border:1px solid rgba(255,255,255,0.2);
-                    font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gray);
-                    margin-bottom:24px;">9:16 FORMAT</div>
-        <h3 style="font-family:'Inter', sans-serif;font-size:26px;font-weight:700;
-                   text-transform:uppercase;margin-bottom:12px;">Brand Edits</h3>
-        <p style="color:var(--gray);font-size:13px;line-height:1.8;margin-bottom:24px;">
-          Short-form vertical content optimized for Instagram Reels, TikTok & YouTube Shorts. 
-          Built for brand consistency and social growth.
-        </p>
-        <ul style="list-style:none;margin-bottom:36px;">
-          <li style="padding:10px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--gray);letter-spacing:1px;">VERTICAL 9:16</li>
-          <li style="padding:10px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--gray);letter-spacing:1px;">REELS · TIKTOK · SHORTS</li>
-          <li style="padding:10px 0;font-size:12px;color:var(--gray);letter-spacing:1px;">BRAND-CONSISTENT STYLE</li>
-        </ul>
+  <section class="wk-cat" data-cat="social" aria-labelledby="wk-social">
+    <header class="wk-head">
+      <span class="wk-n" aria-hidden="true">01</span>
+      <div class="wk-title"><h3 id="wk-social">Social Reels</h3><span class="wk-count">23 edits</span></div>
+      <div class="wk-ctl">
+        <button type="button" class="wk-arr" data-dir="-1" aria-label="Previous Social Reels edits">&larr;</button>
+        <button type="button" class="wk-arr" data-dir="1" aria-label="Next Social Reels edits">&rarr;</button>
+        <a class="wk-order" href="#packages">Order this edit <span>&rarr;</span></a>
       </div>
-      <a href="https://www.instagram.com/kwenmedia/" target="_blank" class="btn-gold" style="display:block;text-align:center;">Book to Open</a>
-    </div>
+    </header>
+    <div class="wk-grid v"><article class="wk-card"><button type="button" class="wk-media" style="--ar:9/16" data-full="full-20.mp4" aria-label="Play edit 01 with sound"><video muted loop playsinline preload="none"><source src="work-20.mp4" type="video/mp4" /></video><span class="wk-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="7,4 20,12 7,20"/></svg></span></button><p class="wk-label">Edit 01</p></article><article class="wk-card"><button type="button" class="wk-media" style="--ar:9/16" data-full="full-21.mp4" aria-label="Play edit 02 with sound"><video muted loop playsinline preload="none"><source src="work-21.mp4" type="video/mp4" /></video><span class="wk-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="7,4 20,12 7,20"/></svg></span></button><p class="wk-label">Edit 02</p></article><article class="wk-card"><button type="button" class="wk-media" style="--ar:9/16" data-full="full-22.mp4" aria-label="Play edit 03 with sound"><video muted loop playsinline preload="none"><source src="work-22.mp4" type="video/mp4" /></video><span class="wk-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="7,4 20,12 7,20"/></svg></span></button><p class="wk-label">Edit 03</p></article><article class="wk-card"><button type="button" class="wk-media" style="--ar:9/16" data-full="full-23.mp4" aria-label="Play edit 04 with sound"><video muted loop playsinline preload="none"><source src="work-23.mp4" type="video/mp4" /></video><span class="wk-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="7,4 20,12 7,20"/></svg></span></button><p class="wk-label">Edit 04</p></article><article class="wk-card"><button type="button" class="wk-media" style="--ar:9/16" data-full="full-24.mp4" aria-label="Play edit 05 with sound"><video muted loop playsinline preload="none"><source src="work-24.mp4" type="video/mp4" /></video><span class="wk-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="7,4 20,12 7,20"/></svg></span></button><p class="wk-label">Edit 05</p></article><article class="wk-card"><button type="button" class="wk-media" style="--ar:9/16" data-full="full-1.mp4" aria-label="Play edit 06 with sound"><video muted loop playsinline preload="none"><source src="work-1.mp4" type="video/mp4" /></video><span class="wk-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="7,4 20,12 7,20"/></svg></span></button><p class="wk-label">Edit 06</p></article><article class="wk-card"><button type="button" class="wk-media" style="--ar:9/16" data-full="full-2.mp4" aria-label="Play edit 07 with sound"><video muted loop playsinline preload="none"><source src="work-2.mp4" type="video/mp4" /></video><span class="wk-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="7,4 20,12 7,20"/></svg></span></button><p class="wk-label">Edit 07</p></article><article class="wk-card"><button type="button" class="wk-media" style="--ar:9/16" data-full="full-3.mp4" aria-label="Play edit 08 with sound"><video muted loop playsinline preload="none"><source src="work-3.mp4" type="video/mp4" /></video><span class="wk-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="7,4 20,12 7,20"/></svg></span></button><p class="wk-label">Edit 08</p></article><article class="wk-card"><button type="button" class="wk-media" style="--ar:9/16" data-full="full-4.mp4" aria-label="Play edit 09 with sound"><video muted loop playsinline preload="none"><source src="work-4.mp4" type="video/mp4" /></video><span class="wk-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="7,4 20,12 7,20"/></svg></span></button><p class="wk-label">Edit 09</p></article><article class="wk-card"><button type="button" class="wk-media" style="--ar:9/16" data-full="full-5.mp4" aria-label="Play edit 10 with sound"><video muted loop playsinline preload="none"><source src="work-5.mp4" type="video/mp4" /></video><span class="wk-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="7,4 20,12 7,20"/></svg></span></button><p class="wk-label">Edit 10</p></article><article class="wk-card"><button type="button" class="wk-media" style="--ar:9/16" data-full="full-6.mp4" aria-label="Play edit 11 with sound"><video muted loop playsinline preload="none"><source src="work-6.mp4" type="video/mp4" /></video><span class="wk-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="7,4 20,12 7,20"/></svg></span></button><p class="wk-label">Edit 11</p></article><article class="wk-card"><button type="button" class="wk-media" style="--ar:9/16" data-full="full-7.mp4" aria-label="Play edit 12 with sound"><video muted loop playsinline preload="none"><source src="work-7.mp4" type="video/mp4" /></video><span class="wk-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="7,4 20,12 7,20"/></svg></span></button><p class="wk-label">Edit 12</p></article><article class="wk-card"><button type="button" class="wk-media" style="--ar:9/16" data-full="full-8.mp4" aria-label="Play edit 13 with sound"><video muted loop playsinline preload="none"><source src="work-8.mp4" type="video/mp4" /></video><span class="wk-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="7,4 20,12 7,20"/></svg></span></button><p class="wk-label">Edit 13</p></article><article class="wk-card"><button type="button" class="wk-media" style="--ar:9/16" data-full="full-10.mp4" aria-label="Play edit 14 with sound"><video muted loop playsinline preload="none"><source src="work-10.mp4" type="video/mp4" /></video><span class="wk-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="7,4 20,12 7,20"/></svg></span></button><p class="wk-label">Edit 14</p></article><article class="wk-card"><button type="button" class="wk-media" style="--ar:9/16" data-full="full-11.mp4" aria-label="Play edit 15 with sound"><video muted loop playsinline preload="none"><source src="work-11.mp4" type="video/mp4" /></video><span class="wk-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="7,4 20,12 7,20"/></svg></span></button><p class="wk-label">Edit 15</p></article><article class="wk-card"><button type="button" class="wk-media" style="--ar:9/16" data-full="full-12.mp4" aria-label="Play edit 16 with sound"><video muted loop playsinline preload="none"><source src="work-12.mp4" type="video/mp4" /></video><span class="wk-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="7,4 20,12 7,20"/></svg></span></button><p class="wk-label">Edit 16</p></article><article class="wk-card"><button type="button" class="wk-media" style="--ar:9/16" data-full="full-13.mp4" aria-label="Play edit 17 with sound"><video muted loop playsinline preload="none"><source src="work-13.mp4" type="video/mp4" /></video><span class="wk-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="7,4 20,12 7,20"/></svg></span></button><p class="wk-label">Edit 17</p></article><article class="wk-card"><button type="button" class="wk-media" style="--ar:9/16" data-full="full-14.mp4" aria-label="Play edit 18 with sound"><video muted loop playsinline preload="none"><source src="work-14.mp4" type="video/mp4" /></video><span class="wk-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="7,4 20,12 7,20"/></svg></span></button><p class="wk-label">Edit 18</p></article><article class="wk-card"><button type="button" class="wk-media" style="--ar:9/16" data-full="full-15.mp4" aria-label="Play edit 19 with sound"><video muted loop playsinline preload="none"><source src="work-15.mp4" type="video/mp4" /></video><span class="wk-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="7,4 20,12 7,20"/></svg></span></button><p class="wk-label">Edit 19</p></article><article class="wk-card"><button type="button" class="wk-media" style="--ar:9/16" data-full="full-16.mp4" aria-label="Play edit 20 with sound"><video muted loop playsinline preload="none"><source src="work-16.mp4" type="video/mp4" /></video><span class="wk-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="7,4 20,12 7,20"/></svg></span></button><p class="wk-label">Edit 20</p></article><article class="wk-card"><button type="button" class="wk-media" style="--ar:9/16" data-full="full-17.mp4" aria-label="Play edit 21 with sound"><video muted loop playsinline preload="none"><source src="work-17.mp4" type="video/mp4" /></video><span class="wk-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="7,4 20,12 7,20"/></svg></span></button><p class="wk-label">Edit 21</p></article><article class="wk-card"><button type="button" class="wk-media" style="--ar:9/16" data-full="full-18.mp4" aria-label="Play edit 22 with sound"><video muted loop playsinline preload="none"><source src="work-18.mp4" type="video/mp4" /></video><span class="wk-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="7,4 20,12 7,20"/></svg></span></button><p class="wk-label">Edit 22</p></article><article class="wk-card"><button type="button" class="wk-media" style="--ar:9/16" data-full="full-19.mp4" aria-label="Play edit 23 with sound"><video muted loop playsinline preload="none"><source src="work-19.mp4" type="video/mp4" /></video><span class="wk-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="7,4 20,12 7,20"/></svg></span></button><p class="wk-label">Edit 23</p></article></div>
+  </section>
 
-    <!-- YouTube Edits 16:9 -->
-    <div style="background:var(--dark2);padding:48px 36px;display:flex;flex-direction:column;justify-content:space-between;">
-      <div>
-        <div style="display:inline-block;padding:4px 12px;border:1px solid rgba(255,255,255,0.2);
-                    font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--gray);
-                    margin-bottom:24px;">16:9 FORMAT</div>
-        <h3 style="font-family:'Inter', sans-serif;font-size:26px;font-weight:700;
-                   text-transform:uppercase;margin-bottom:12px;">YouTube Edits</h3>
-        <p style="color:var(--gray);font-size:13px;line-height:1.8;margin-bottom:24px;">
-          Full landscape edits optimized for YouTube. Longer format, cinematic pacing, 
-          ideal for property walkthroughs and brand storytelling.
-        </p>
-        <ul style="list-style:none;margin-bottom:36px;">
-          <li style="padding:10px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--gray);letter-spacing:1px;">LANDSCAPE 16:9</li>
-          <li style="padding:10px 0;border-bottom:1px solid var(--border);font-size:12px;color:var(--gray);letter-spacing:1px;">YOUTUBE OPTIMIZED</li>
-          <li style="padding:10px 0;font-size:12px;color:var(--gray);letter-spacing:1px;">CINEMATIC PACING</li>
-        </ul>
+  <section class="wk-cat" data-cat="cinematic" aria-labelledby="wk-cinematic">
+    <header class="wk-head">
+      <span class="wk-n" aria-hidden="true">02</span>
+      <div class="wk-title"><h3 id="wk-cinematic">Cinematic &amp; Walkthrough</h3><span class="wk-count">3 edits</span></div>
+      <div class="wk-ctl">
+        <button type="button" class="wk-arr" data-dir="-1" aria-label="Previous Cinematic &amp; Walkthrough edits">&larr;</button>
+        <button type="button" class="wk-arr" data-dir="1" aria-label="Next Cinematic &amp; Walkthrough edits">&rarr;</button>
+        <a class="wk-order" href="#packages">Order this edit <span>&rarr;</span></a>
       </div>
-      <a href="https://www.instagram.com/kwenmedia/" target="_blank" class="btn-gold" style="display:block;text-align:center;">Book to Open</a>
-    </div>
-
-  </div>
+    </header>
+    <div class="wk-grid h"><article class="wk-card"><button type="button" class="wk-media" style="--ar:16/9" data-full="full-h1.mp4" aria-label="Play edit 01 with sound"><video muted loop playsinline preload="none"><source src="work-h1.mp4" type="video/mp4" /></video><span class="wk-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="7,4 20,12 7,20"/></svg></span></button><p class="wk-label">Edit 01</p></article><article class="wk-card"><button type="button" class="wk-media" style="--ar:16/9" data-full="full-h2.mp4" aria-label="Play edit 02 with sound"><video muted loop playsinline preload="none"><source src="work-h2.mp4" type="video/mp4" /></video><span class="wk-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="7,4 20,12 7,20"/></svg></span></button><p class="wk-label">Edit 02</p></article><article class="wk-card"><button type="button" class="wk-media" style="--ar:16/9" data-full="full-h3.mp4" aria-label="Play edit 03 with sound"><video muted loop playsinline preload="none"><source src="work-h3.mp4" type="video/mp4" /></video><span class="wk-play" aria-hidden="true"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="7,4 20,12 7,20"/></svg></span></button><p class="wk-label">Edit 03</p></article></div>
+  </section>
 </section>
+
+<div class="wk-lb" id="wkLb" role="dialog" aria-modal="true" aria-label="Video player">
+  <button type="button" class="wk-lb-x" id="wkLbX" aria-label="Close">&times;</button>
+  <video id="wkLbV" controls playsinline></video>
+</div>
 
 <footer>
   <div style="text-align:center; padding: 48px 60px 0;">
@@ -1210,5 +1274,37 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 <script src="contact.js"></script>
+
+<script>
+// THE WORK: filters, arrows, on-screen preview playback, click to play with sound
+(function () {
+  const list = document.getElementById('work'); if (!list) return;
+  const cats = list.querySelectorAll('.wk-cat');
+  list.querySelectorAll('.wk-filters button').forEach(b => b.addEventListener('click', () => {
+    list.querySelectorAll('.wk-filters button').forEach(x => x.classList.toggle('on', x === b));
+    cats.forEach(c => { c.style.display = (b.dataset.f === 'all' || c.dataset.cat === b.dataset.f) ? '' : 'none'; });
+  }));
+  cats.forEach(c => {
+    const g = c.querySelector('.wk-grid'), arrs = c.querySelectorAll('.wk-arr');
+    const upd = () => { arrs[0].disabled = g.scrollLeft < 4; arrs[1].disabled = g.scrollLeft + g.clientWidth >= g.scrollWidth - 4; };
+    arrs.forEach(a => a.addEventListener('click', () => g.scrollBy({ left: +a.dataset.dir * g.clientWidth * 0.85 })));
+    g.addEventListener('scroll', upd, { passive: true }); window.addEventListener('resize', upd); upd();
+  });
+  const io = new IntersectionObserver(es => es.forEach(e => {
+    const v = e.target;
+    if (e.isIntersecting) { if (v.preload !== 'auto') v.preload = 'auto'; v.play().catch(() => {}); } else v.pause();
+  }), { rootMargin: '100px' });
+  list.querySelectorAll('.wk-media video').forEach(v => io.observe(v));
+  const lb = document.getElementById('wkLb'), lv = document.getElementById('wkLbV');
+  const close = () => { lv.pause(); lv.removeAttribute('src'); lv.load(); lb.classList.remove('active'); document.body.style.overflow = ''; };
+  list.querySelectorAll('.wk-media').forEach(m => m.addEventListener('click', () => {
+    lv.src = m.dataset.full; lb.classList.add('active'); document.body.style.overflow = 'hidden';
+    lv.muted = false; lv.play().catch(() => {});
+  }));
+  document.getElementById('wkLbX').addEventListener('click', close);
+  lb.addEventListener('click', e => { if (e.target === lb) close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && lb.classList.contains('active')) close(); });
+})();
+</script>
 </body>
 </html>
