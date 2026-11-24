@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>About | kwenmedia</title>
+  <title>Why Kwen | kwenmedia</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet" />
   <style>
@@ -501,6 +501,18 @@
       .ab-n { font-size: 30px; }
       .ab-vals { grid-template-columns: 1fr; }
     }
+    .hw-steps { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 40px; }
+    .hw-line { display: block; position: relative; height: 1px; background: rgba(255,255,255,.18); margin-bottom: 36px; }
+    .hw-line::before { content: ""; position: absolute; left: 0; top: -3px; width: 7px; height: 7px; border-radius: 50%; background: var(--white); }
+    .hw-n {
+      display: block; font-family: 'Inter', sans-serif; font-weight: 800; font-size: 64px; line-height: 1; letter-spacing: -0.04em;
+      background: linear-gradient(180deg, #f5f5f0 0%, rgba(245,245,240,.35) 100%); -webkit-background-clip: text; background-clip: text; color: transparent;
+      margin-bottom: 18px;
+    }
+    .hw-step h3 { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 24px; text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 14px; }
+    .hw-step p { color: var(--gray); font-size: 15px; line-height: 1.75; }
+    @media (max-width: 960px) { .hw-steps { grid-template-columns: 1fr 1fr; gap: 48px 32px; } }
+    @media (max-width: 560px) { .hw-steps { grid-template-columns: 1fr; gap: 40px; } .hw-n { font-size: 52px; } }
     </style>
   <link rel="stylesheet" href="contact.css" />
   <link rel="icon" href="favicon.ico" sizes="any" />
@@ -514,9 +526,10 @@
 <nav id="navbar">
   <a href="index.html" class="nav-logo"><img src="logo.png" alt="Kwen Media" style="height:30px;width:auto;display:block;" /></a>
   <ul class="nav-links">
+    <li><a href="index.html">Home</a></li>
     <li><a href="order.html" >Order Edits</a></li>
     <li><a href="agency.html" >Agency</a></li>
-    <li><a href="about.html" style="color:#fff">About</a></li>
+    <li><a href="about.html" style="color:#fff">Why Kwen</a></li>
   </ul>
   <div class="nav-ctas">
     <a href="https://www.instagram.com/kwenmedia/" target="_blank" class="btn-gold">Book to Open</a>
@@ -526,7 +539,7 @@
 
 <section class="ab" style="padding:150px 60px 40px; max-width:1160px; margin:0 auto;">
   <div class="fade-in">
-    <p class="section-label">About</p>
+    <p class="section-label">Why Kwen</p>
     <h1 class="section-title">I'm Kwen.<br /><em>Editor. Builder. Kwen Media.</em></h1>
   </div>
 
@@ -579,16 +592,12 @@
 </section>
 
 <section class="ab-values" style="padding:60px 60px 120px; max-width:1160px; margin:0 auto;">
-  <div class="fade-in" style="margin-bottom:40px;">
-    <p class="section-label">What I believe</p>
-    <h2 class="section-title">Quality. Always first.</h2>
+  <div class="fade-in" style="margin-bottom:48px;">
+    <p class="section-label">How it works</p>
+    <h2 class="section-title">Simple from start to finish.</h2>
   </div>
-  <div class="ab-vals fade-in">
-    <div class="ab-val"><h3>Every edit is my reputation</h3><p>I learned that from a single 1-star review. Every video gets the care of the one that earned my second chance.</p></div>
-    <div class="ab-val"><h3>Own it, then fix it</h3><p>If something isn't right, I say so and make it right, fast. Clear communication beats excuses.</p></div>
-    <div class="ab-val"><h3>Never stop learning</h3><p>CapCut, then DaVinci, then Final Cut. Styles change fast on social media, so I keep learning to stay ahead of them.</p></div>
-  </div>
-  <div class="fade-in" style="text-align:center;margin-top:64px;">
+  <div class="hw-steps fade-in"><div class="hw-step"><span class="hw-line"></span><span class="hw-n">01</span><h3>Upload</h3><p>Send your footage via Google Drive, Dropbox or WeTransfer.</p></div><div class="hw-step"><span class="hw-line"></span><span class="hw-n">02</span><h3>Brief</h3><p>Pick a package and share a reference video or the style you want.</p></div><div class="hw-step"><span class="hw-line"></span><span class="hw-n">03</span><h3>Edit &amp; Review</h3><p>I cut, color and mix your video. You get 2 revision rounds.</p></div><div class="hw-step"><span class="hw-line"></span><span class="hw-n">04</span><h3>Deliver</h3><p>Final files ready to post, delivered within 24–72 hours.</p></div></div>
+  <div class="fade-in" style="text-align:center;margin-top:72px;">
     <a href="#contact" class="btn-gold">Book to Open</a>
   </div>
 </section>
@@ -624,7 +633,7 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="order.html">Order Edits</a></li>
         <li><a href="agency.html">Agency</a></li>
-        <li><a href="about.html">About</a></li>
+        <li><a href="about.html">Why Kwen</a></li>
       </ul>
     </div>
   </div>

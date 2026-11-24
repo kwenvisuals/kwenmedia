@@ -155,7 +155,8 @@
     const panel = document.createElement('div');
     panel.className = 'mnav'; panel.id = 'mnav';
     const here = location.pathname.split('/').pop() || 'index.html';
-    const items = [['index.html', 'Home'], ...links.map(a => [a.getAttribute('href'), a.textContent.trim()])];
+    const items = links.map(a => [a.getAttribute('href'), a.textContent.trim()]);
+    if (!items.some(([h]) => h === 'index.html')) items.unshift(['index.html', 'Home']);
     if (order) items.push([order.getAttribute('href'), order.textContent.trim()]);
     panel.innerHTML = items.map(([h, t]) => `<a href="${h}"${h === here ? ' class="cur"' : ''}>${t}</a>`).join('');
     document.body.appendChild(panel);
