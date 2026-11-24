@@ -465,6 +465,42 @@
     .footer-logo { text-transform: uppercase; }
     /* opsz-global: Inter 18pt optical size everywhere */
     html { font-optical-sizing: none; font-variation-settings: 'opsz' 18; }
+    /* ── ABOUT PAGE ── */
+    .ab-intro { display: grid; grid-template-columns: minmax(0, 380px) minmax(0, 1fr); gap: 64px; align-items: start; margin-top: 56px; }
+    .ab-photo {
+      margin: 0; aspect-ratio: 4/5; background: var(--dark2); border: 1px solid rgba(255,255,255,.06);
+      border-radius: 6px; overflow: hidden; display: grid; place-items: center;
+    }
+    .ab-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .ab-photo img.ab-photo-ph { width: 46%; height: auto; object-fit: contain; opacity: .18; }
+    .ab-lead { font-size: 20px; line-height: 1.7; color: rgba(245,245,240,.88); margin-bottom: 32px; }
+    .ab-facts { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .ab-fact { background: var(--dark2); padding: 26px 28px; }
+    .ab-fact:last-child { grid-column: 1 / -1; }
+    .ab-fact span { display: block; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--gray); margin-bottom: 8px; }
+    .ab-fact b { font-size: 15px; font-weight: 500; }
+    .ab-fact a { color: var(--white); text-decoration: none; }
+    .ab-chs { position: relative; }
+    .ab-ch { display: grid; grid-template-columns: 90px minmax(0, 1fr); gap: 24px; padding: 34px 0; border-top: 1px solid var(--border); }
+    .ab-ch:last-child { border-bottom: 1px solid var(--border); }
+    .ab-n { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 40px; line-height: 1; letter-spacing: -0.04em; color: rgba(245,245,240,.3); }
+    .ab-ch h3 { font-family: 'Inter', sans-serif; font-weight: 800; font-size: 22px; text-transform: uppercase; letter-spacing: -0.02em; margin-bottom: 12px; }
+    .ab-ch p { color: rgba(245,245,240,.75); font-size: 15.5px; line-height: 1.9; max-width: 720px; }
+    .ab-vals { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; }
+    .ab-val { background: var(--dark2); padding: 36px 32px; }
+    .ab-val h3 { font-family: 'Inter', sans-serif; font-weight: 700; font-size: 18px; margin-bottom: 12px; }
+    .ab-val p { color: var(--gray); font-size: 14px; line-height: 1.8; }
+    @media (max-width: 860px) {
+      .ab, .ab-story, .ab-values { padding-left: 22px !important; padding-right: 22px !important; }
+      .ab { padding-top: 120px !important; }
+      .ab-intro { grid-template-columns: 1fr; gap: 32px; }
+      .ab-photo { max-width: 420px; }
+      .ab-lead { font-size: 17px; }
+      .ab-facts { grid-template-columns: 1fr; }
+      .ab-ch { grid-template-columns: 1fr; gap: 10px; }
+      .ab-n { font-size: 30px; }
+      .ab-vals { grid-template-columns: 1fr; }
+    }
     </style>
   <link rel="stylesheet" href="contact.css" />
   <link rel="icon" href="favicon.ico" sizes="any" />
@@ -488,42 +524,72 @@
 </nav>
 
 
-<section style="padding:160px 60px 100px; max-width:900px; margin:0 auto;">
+<section class="ab" style="padding:150px 60px 40px; max-width:1160px; margin:0 auto;">
   <div class="fade-in">
     <p class="section-label">About</p>
-    <h1 class="section-title">I'm Kwen.<br /><em>Editor. Builder. Visuals.</em></h1>
+    <h1 class="section-title">I'm Kwen.<br /><em>Editor. Builder. Kwen Media.</em></h1>
   </div>
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:60px;" class="fade-in">
+  <div class="ab-intro fade-in">
+    <figure class="ab-photo" aria-label="Portrait of Kwen">
+      <img src="logo.png" alt="" class="ab-photo-ph" />
+    </figure>
     <div>
-      <p style="color:rgba(245,245,240,0.75);font-size:15px;line-height:2;margin-bottom:24px;">
-        [Add your story here — where you're from, how you got into editing, what drives you.]
-      </p>
-      <p style="color:rgba(245,245,240,0.75);font-size:15px;line-height:2;margin-bottom:24px;">
-        [Talk about your journey — from working solo to building kwenmedia into something bigger.]
-      </p>
-      <p style="color:rgba(245,245,240,0.75);font-size:15px;line-height:2;">
-        [What you believe in: cinematic quality, clean work, real results for real estate media companies.]
-      </p>
+      <p class="ab-lead">I'm a self-taught video editor from Vietnam. I started with a borrowed laptop and free tutorials, and today I edit real estate content for agents and media teams across the US, Canada and Australia.</p>
+      <div class="ab-facts"><div class="ab-fact"><span>Based in</span><b>Ho Chi Minh City, Vietnam</b></div><div class="ab-fact"><span>Specialty</span><b>Real estate short-form video</b></div><div class="ab-fact"><span>Markets</span><b>US · Canada · Australia</b></div><div class="ab-fact"><span>Tools</span><b>DaVinci Resolve · Final Cut Pro</b></div><div class="ab-fact"><span>Find me</span><b><a href="https://www.instagram.com/kwenmedia/" target="_blank" rel="noopener">@kwenmedia</a></b></div></div>
     </div>
-    <div>
-      <div style="background:var(--dark2);padding:40px;margin-bottom:2px;">
-        <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gray);margin-bottom:8px;">Based In</div>
-        <div style="font-size:16px;font-weight:500;">Ho Chi Minh City, Vietnam</div>
-      </div>
-      <div style="background:var(--dark2);padding:40px;margin-bottom:2px;">
-        <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gray);margin-bottom:8px;">Specialty</div>
-        <div style="font-size:16px;font-weight:500;">Real Estate Short-Form Video</div>
-      </div>
-      <div style="background:var(--dark2);padding:40px;margin-bottom:2px;">
-        <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gray);margin-bottom:8px;">Markets</div>
-        <div style="font-size:16px;font-weight:500;">US · Canada · Australia</div>
-      </div>
-      <div style="background:var(--dark2);padding:40px;">
-        <div style="font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--gray);margin-bottom:8px;">Find Me</div>
-        <div style="font-size:16px;font-weight:500;"><a href="https://www.instagram.com/kwenmedia/" target="_blank" style="color:var(--white);text-decoration:none;">@kwenmedia</a></div>
-      </div>
-    </div>
+  </div>
+</section>
+
+<section class="ab-story" style="padding:60px 60px 40px; max-width:1160px; margin:0 auto;">
+  <div class="fade-in" style="margin-bottom:40px;">
+    <p class="section-label">The journey</p>
+    <h2 class="section-title">How I got here.</h2>
+  </div>
+  <div class="ab-chs">
+      <article class="ab-ch fade-in">
+        <span class="ab-n">01</span>
+        <div><h3>The borrowed MacBook</h3><p>It started with a loan from my mom. I used it to buy a 13-inch M1 MacBook from 2020 with 16GB of RAM, a machine I couldn't afford yet, for a skill I didn't have yet.</p></div>
+      </article>
+      <article class="ab-ch fade-in">
+        <span class="ab-n">02</span>
+        <div><h3>Self-taught, one week in</h3><p>No school, no mentor. Just free lessons on TikTok and YouTube. I started with CapCut, and after about a week of practice every day, I was confident enough to go looking for work.</p></div>
+      </article>
+      <article class="ab-ch fade-in">
+        <span class="ab-n">03</span>
+        <div><h3>Knocking on every door</h3><p>I joined every Facebook group for editors and content teams and messaged anyone who was hiring. About 1 in 10 replied, because nobody knew who I was. So I took every job I could get, mostly talking-head videos, and priced well below the market so people would take a chance on someone with nothing to show yet.</p></div>
+      </article>
+      <article class="ab-ch fade-in">
+        <span class="ab-n">04</span>
+        <div><h3>Leveling up to DaVinci</h3><p>A few months in, a colleague showed me DaVinci Resolve. I was hooked. In about a month I'd moved my whole workflow over and learned color grading and motion graphics. That's where my edits started to look different.</p></div>
+      </article>
+      <article class="ab-ch fade-in">
+        <span class="ab-n">05</span>
+        <div><h3>The 1-star review</h3><p>On Upwork I built my profile from zero: YouTube videos, talking heads, anything I could do well. I chased 5 stars on every job. Then one project went wrong, there was a misunderstanding, and the client left me 1 star. It hurt my profile, and it hurt more personally. I felt like I wasn't good enough. But I didn't let it go. I kept reaching out until he gave me a second project. I delivered it fast and for free. He removed the review. That one taught me more than any tutorial: own the mistake, then outwork it.</p></div>
+      </article>
+      <article class="ab-ch fade-in">
+        <span class="ab-n">06</span>
+        <div><h3>Finding real estate</h3><p>After more than a year, real estate content on social media exploded with a fresh, high-energy editing style. I wanted in. I learned Final Cut Pro, and within 3 days of learning and testing it was working. From then on I focused on real estate only.</p></div>
+      </article>
+      <article class="ab-ch fade-in">
+        <span class="ab-n">07</span>
+        <div><h3>Kwen Media</h3><p>That's how Kwen Media started. Today I edit for agents and media teams in the US, Canada and Australia, look after every client I already have, and keep looking for new ones. The goal now is bigger than me: to grow Kwen Media into a team that edits with the same care I learned the hard way.</p></div>
+      </article>
+  </div>
+</section>
+
+<section class="ab-values" style="padding:60px 60px 120px; max-width:1160px; margin:0 auto;">
+  <div class="fade-in" style="margin-bottom:40px;">
+    <p class="section-label">What I believe</p>
+    <h2 class="section-title">Quality. Always first.</h2>
+  </div>
+  <div class="ab-vals fade-in">
+    <div class="ab-val"><h3>Every edit is my reputation</h3><p>I learned that from a single 1-star review. Every video gets the care of the one that earned my second chance.</p></div>
+    <div class="ab-val"><h3>Own it, then fix it</h3><p>If something isn't right, I say so and make it right, fast. Clear communication beats excuses.</p></div>
+    <div class="ab-val"><h3>Never stop learning</h3><p>CapCut, then DaVinci, then Final Cut. Styles change fast on social media, so I keep learning to stay ahead of them.</p></div>
+  </div>
+  <div class="fade-in" style="text-align:center;margin-top:64px;">
+    <a href="#contact" class="btn-gold">Book to Open</a>
   </div>
 </section>
 
